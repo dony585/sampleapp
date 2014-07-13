@@ -1,0 +1,28 @@
+<div class="row">
+  <aside class="span4">
+    <section>
+      <% if current_user?(@user) %>
+        <%= render 'shared/user_info' %>
+      <% else %>
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.name %>
+        </h1>
+      <% end %>
+    </section>
+
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+
+  <div class="span8">
+  	<h3>Unread Microposts</h3>
+    <% if @unreadposts.any? %>
+      <ol id="unreadposts" class="microposts">
+      	<%= render :partial => 'unreadpost', :collection => @unreadposts, :as => :micropost %>
+      </ol>
+      
+    <% end %>
+  </div>
+</div>

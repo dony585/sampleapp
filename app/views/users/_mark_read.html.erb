@@ -1,0 +1,9 @@
+<%= form_for(current_user.markings.find_by_micropost_id(id),
+             html: { method: :delete },
+             remote: true) do |f| %>
+      
+    <div><%= hidden_field_tag("micropost_id", id) %></div>
+    <%= f.submit "Mark as Read", class: "btn btn-primary btn-marking" %>
+      
+<% end %>
+

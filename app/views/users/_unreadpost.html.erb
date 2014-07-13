@@ -1,0 +1,24 @@
+<li id="postcontent-<%= micropost.id %>">
+  <%= link_to gravatar_for(micropost.user), micropost.user %>
+  <span class="user">
+    <%= link_to micropost.user.name, micropost.user %>
+  </span>
+  <span class="content"><%= micropost.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+  </span>
+
+  <span id="markbtn-<%= micropost.id %>" class="marking-form">
+    <% if @unreadpost_ids.include?(micropost.id) %>
+      <%= render partial: "mark_read", locals: {id: micropost.id} %>
+    <% else %>
+      <%= render partial: "mark_unread", locals: {id: micropost.id} %>
+    <% end %>
+  </span>
+  
+  <% if current_user?(micropost.user) %>
+    <%= link_to "delete", micropost, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: micropost.content %>
+  <% end %>
+</li>

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    @unreadpost_ids = current_user.unread_posts.map(&:id)
   end
 
   def new
@@ -59,6 +60,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
+  end
+
+  def unread
+    @user = User.find(params[:id])
+    
+    if current_user?(@user)
+      @unreadposts = current_user.unread_posts
+    else
+      @unreadposts = current_user.unread_posts.find_all_by_user_id(@user.id)
+    end
+    
+    @unreadpost_ids = @unreadposts.map(&:id)
+    render 'show_unread'
   end
 
   private

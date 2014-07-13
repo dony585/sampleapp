@@ -1,0 +1,3 @@
+$("#markbtn-<%= @postid %>").html("<%= escape_javascript(render( partial: 'users/mark_unread', locals: {id: @postid})) %>")
+$("li#postcontent-<%= @postid %>").remove()
+$("#unread").html('<%= current_user.unread_posts.count %>')
