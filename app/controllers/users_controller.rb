@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
   def unread
     @user = User.find(params[:id])
-    
+    @correct_user = @user
     if current_user?(@user)
       @unreadposts = current_user.unread_posts
     else

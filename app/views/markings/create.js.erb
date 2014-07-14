@@ -1,2 +1,5 @@
 $("#markbtn-<%= @postid %>").html("<%= escape_javascript(render( partial: 'users/mark_read', locals: {id: @postid})) %>")
-$("#unread").html('<%= current_user.unread_posts.count %>')
+if ($("#unreadpro").length > 0)
+	$("#unread").html('<%= current_user.unread_posts.find_all_by_user_id(@correct_user.id).count %>')
+else
+	$("#unread").html('<%= current_user.unread_posts.count %>')

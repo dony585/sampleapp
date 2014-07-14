@@ -20,7 +20,7 @@
       unread posts
     </a>
   <% else %>
-    <a href="<%= unread_user_path(@user) %>">
+    <a href="<%= unread_user_path(@user) %>" id="unreadpro">
       <strong id="unread" class="stat">
         <%= current_user.unread_posts.find_all_by_user_id(@user.id).count %>
       </strong>
